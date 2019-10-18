@@ -51,5 +51,36 @@ namespace magic.lambda.validators.tests
             Assert.True(args.Value.GetType() == typeof(string));
             Assert.Empty(args.Children);
         }
+
+        [Fact]
+        public void VerifyUrl()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "http://foo.com");
+            signaler.Signal("validators.url", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyHttpsUrl()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "https://foo.com");
+            signaler.Signal("validators.url", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyUrl_FAILS()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "foo.com");
+            signaler.Signal("validators.url", args);
+            Assert.NotNull(args.Value);
+            Assert.True(args.Value.GetType() == typeof(string));
+            Assert.Empty(args.Children);
+        }
     }
 }
