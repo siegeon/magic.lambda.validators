@@ -14,7 +14,7 @@ namespace magic.lambda.validators
     /// [validators.email] slot, for verifying that some input is a valid email address.
     /// </summary>
     [Slot(Name = "validators.email")]
-    public class ValidatEmail : ISlot
+    public class ValidateEmail : ISlot
     {
         /// <summary>
         /// Implementation of slot.
