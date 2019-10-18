@@ -104,5 +104,26 @@ namespace magic.lambda.validators.tests
             Assert.True(args.Value.GetType() == typeof(string));
             Assert.Empty(args.Children);
         }
+
+        [Fact]
+        public void VerifyEnum()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "foo", new Node[] { new Node("", "foo"), new Node("", "bar") });
+            signaler.Signal("validators.enum", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyEnum_FAILS()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "foo1", new Node[] { new Node("", "foo"), new Node("", "bar") });
+            signaler.Signal("validators.enum", args);
+            Assert.NotNull(args.Value);
+            Assert.True(args.Value.GetType() == typeof(string));
+            Assert.Empty(args.Children);
+        }
     }
 }
