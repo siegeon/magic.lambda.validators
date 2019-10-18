@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using Xunit;
 using magic.node;
 
@@ -78,6 +79,27 @@ namespace magic.lambda.validators.tests
             var signaler = Common.Initialize();
             var args = new Node("", "foo.com");
             signaler.Signal("validators.url", args);
+            Assert.NotNull(args.Value);
+            Assert.True(args.Value.GetType() == typeof(string));
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyDate()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", DateTime.Now, new Node[] { new Node("min", DateTime.Now.AddSeconds(-5)), new Node("max", DateTime.Now.AddSeconds(5)) });
+            signaler.Signal("validators.date", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyDate_FAILS()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", DateTime.Now.AddSeconds(10), new Node[] { new Node("min", DateTime.Now.AddSeconds(-5)), new Node("max", DateTime.Now.AddSeconds(5)) });
+            signaler.Signal("validators.date", args);
             Assert.NotNull(args.Value);
             Assert.True(args.Value.GetType() == typeof(string));
             Assert.Empty(args.Children);
