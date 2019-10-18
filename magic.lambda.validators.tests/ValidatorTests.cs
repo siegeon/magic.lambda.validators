@@ -125,5 +125,47 @@ namespace magic.lambda.validators.tests
             Assert.True(args.Value.GetType() == typeof(string));
             Assert.Empty(args.Children);
         }
+
+        [Fact]
+        public void VerifyMandatory()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "foo");
+            signaler.Signal("validators.mandatory", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyMandator_FAILS()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("");
+            signaler.Signal("validators.mandatory", args);
+            Assert.NotNull(args.Value);
+            Assert.True(args.Value.GetType() == typeof(string));
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyRegEx()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "foo", new Node[] { new Node("regex", "^foo$") });
+            signaler.Signal("validators.regex", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyRegEx_FAILS()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "foo_XXX", new Node[] { new Node("regex", "^foo$") });
+            signaler.Signal("validators.regex", args);
+            Assert.NotNull(args.Value);
+            Assert.True(args.Value.GetType() == typeof(string));
+            Assert.Empty(args.Children);
+        }
     }
 }
