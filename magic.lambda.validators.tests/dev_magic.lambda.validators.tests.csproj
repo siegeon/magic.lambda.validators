@@ -22,9 +22,4 @@
     <ProjectReference Include="..\magic.lambda.validators\dev_magic.lambda.validators.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration">
-    </Reference>
-  </ItemGroup>
-
 </Project>
