@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.Net.Mail;
 using magic.node;
 using magic.node.extensions;
@@ -27,6 +28,8 @@ namespace magic.lambda.validators
             try
             {
                 var addr = new MailAddress(email);
+                if (addr.Address != email)
+                    throw new Exception(); // Verifying there are not funny configurations, creating name as first part
                 input.Value = null;
             }
             catch
