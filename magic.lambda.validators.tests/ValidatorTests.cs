@@ -26,10 +26,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo@@bar.com");
-            signaler.Signal("validators.email", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<FormatException>(() => signaler.Signal("validators.email", args));
         }
 
         [Fact]
@@ -47,10 +44,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", 8, new Node[] { new Node("min", 4), new Node("max", 7) });
-            signaler.Signal("validators.integer", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.integer", args));
         }
 
         [Fact]
@@ -68,10 +62,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "how", new Node[] { new Node("min", 4), new Node("max", 7) });
-            signaler.Signal("validators.string", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.string", args));
         }
 
         [Fact]
@@ -99,10 +90,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo.com");
-            signaler.Signal("validators.url", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.url", args));
         }
 
         [Fact]
@@ -120,10 +108,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", DateTime.Now.AddSeconds(10), new Node[] { new Node("min", DateTime.Now.AddSeconds(-5)), new Node("max", DateTime.Now.AddSeconds(5)) });
-            signaler.Signal("validators.date", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.date", args));
         }
 
         [Fact]
@@ -141,10 +126,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo1", new Node[] { new Node("", "foo"), new Node("", "bar") });
-            signaler.Signal("validators.enum", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.enum", args));
         }
 
         [Fact]
@@ -162,10 +144,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("");
-            signaler.Signal("validators.mandatory", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.mandatory", args));
         }
 
         [Fact]
@@ -183,10 +162,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo_XXX", new Node[] { new Node("regex", "^foo$") });
-            signaler.Signal("validators.regex", args);
-            Assert.NotNull(args.Value);
-            Assert.True(args.Value.GetType() == typeof(string));
-            Assert.Empty(args.Children);
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.regex", args));
         }
     }
 }
