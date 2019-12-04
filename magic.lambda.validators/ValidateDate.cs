@@ -30,7 +30,7 @@ namespace magic.lambda.validators
             input.Value = null;
             input.Clear();
             if (value < min || value > max)
-                throw new ArgumentException($"the date time value of '{value}' is not between '{min}' and '{max}', which is a mandatory condition");
+                throw new ArgumentException($"The date time value of '{value}' is not between '{min}' and '{max}', which is a mandatory condition");
         }
     }
 }
