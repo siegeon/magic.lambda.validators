@@ -28,7 +28,7 @@ namespace magic.lambda.validators
             input.Value = null;
             input.Clear();
             if (!result || (res.Scheme != Uri.UriSchemeHttp && res.Scheme != Uri.UriSchemeHttps))
-                input.Value = $"'{url}' is not a valid URL, it needs to be prepended with http:// or https:// and also be a valid URL";
+                throw new ArgumentException($"'{url}' is not a valid URL, it needs to be prepended with http:// or https:// and also be a valid URL");
         }
     }
 }

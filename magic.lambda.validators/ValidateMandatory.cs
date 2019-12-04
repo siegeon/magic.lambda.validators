@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
@@ -23,11 +24,8 @@ namespace magic.lambda.validators
         public void Signal(ISignaler signaler, Node input)
         {
             if (input.GetEx<object>() == null)
-            {
-                input.Value = "Mandatory valus was not given";
-                input.Clear();
-                return;
-            }
+                throw new ArgumentException("Mandatory value was not given");
+
             input.Value = null;
             input.Clear();
         }

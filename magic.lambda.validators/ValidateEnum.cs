@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.Linq;
 using magic.node;
 using magic.node.extensions;
@@ -27,10 +28,9 @@ namespace magic.lambda.validators
             if (!input.Children.Any(x => x.Get<string>() == value))
             {
                 var legalValues = input.Children.Select(x => "'" + x.Get<string>() + "'");
-                var legalValuString = string.Join(", ", legalValues.ToArray());
+                var legalValueString = string.Join(", ", legalValues.ToArray());
                 input.Clear();
-                input.Value = $"'{value}' is not a legal value for field, [{legalValuString}] is a legal value for input.";
-                return;
+                throw new ArgumentException($"'{value}' is not a legal value for field, [{legalValueString}] is a legal value for input.");
             }
             input.Value = null;
             input.Clear();

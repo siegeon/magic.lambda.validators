@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.Linq;
 using magic.node;
 using magic.node.extensions;
@@ -29,7 +30,7 @@ namespace magic.lambda.validators
             input.Value = null;
             input.Clear();
             if (value.Length < min || value.Length > max)
-                input.Value = $"'{value}' for is not between {min} and {max} in length, which is a mandatory condition";
+                throw new ArgumentException($"'{value}' for is not between {min} and {max} in length, which is a mandatory condition");
         }
     }
 }

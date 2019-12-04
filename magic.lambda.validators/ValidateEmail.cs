@@ -25,17 +25,10 @@ namespace magic.lambda.validators
         public void Signal(ISignaler signaler, Node input)
         {
             var email = input.GetEx<string>();
-            try
-            {
-                var addr = new MailAddress(email);
-                if (addr.Address != email)
-                    throw new Exception(); // Verifying there are not funny configurations, creating name as first part
-                input.Value = null;
-            }
-            catch
-            {
-                input.Value = $"'{email}' is not a valid email address";
-            }
+            input.Value = null;
+            var addr = new MailAddress(email);
+            if (addr.Address != email)
+                throw new ArgumentException($"'{email}' is not a valid email address"); // Verifying there are not funny configurations, creating name as first part
         }
     }
 }

@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using magic.node;
@@ -28,11 +29,8 @@ namespace magic.lambda.validators
             var pattern = input.Children.First(x => x.Name == "regex").GetEx<string>();
             var isMatch = new Regex(pattern).IsMatch(value);
             if (!isMatch)
-            {
-                input.Value = $"Value of '{value}' does not conform to regular expression of '{pattern}'";
-                input.Clear();
-                return;
-            }
+                throw new ArgumentException($"Value of '{value}' does not conform to regular expression of '{pattern}'");
+
             input.Value = null;
             input.Clear();
         }
