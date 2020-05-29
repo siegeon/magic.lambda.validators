@@ -14,5 +14,36 @@ This project contains input validators for Magic. More specifically it contains 
 * __[validators.string]__ - Verifies that some string input is between __[min]__ and __[max]__ length.
 * __[validators.url]__ - Verifies that some string input is a legal URL, either HTTP or HTTPS type of scheme.
 
-All of the above slots takes an expression, or valus, as its main input, and will return a friendly error message after having been
-invoked as their main value if validation failed.
+All of the above slots takes an expression, or valus, as its main input, and will throw exceptions if their input expression's
+value, or its value, does not follow the rules specified by the validator. This makes them perfect fits for _"intercepting"_ the
+input specified to an HTTP REST endpoint, to verify the input data conforms to some sort of predefined validator.
+
+## Usage
+
+```
+.foo
+   number:int:11
+
+/*
+ * This will throw an exception, since the expression's value is outside of the bounds
+ * of the **[min]**/**[max]** range for the validator declaration.
+ */
+validators.integer:x:@.foo/*/number
+   min:int:5
+   max:int:10
+```
+
+Most validators requires some sort of argument(s), such as you can see above in the integer validator - However, some of
+these validators are without arguments, such as the email validator, that simply verifies the input is a valid email address.
+To use the **[validators.regex]** validator, you should probably [learn regular expression](https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285).
+However, this is beyond the scope of this article.
+
+## License
+
+Although most of Magic's source code is publicly available, Magic is _not_ Open Source or Free Software.
+You have to obtain a valid license key to install it in production, and I normally charge a fee for such a
+key. You can [obtain a license key here](https://servergardens.com/buy/).
+Notice, 5 hours after you put Magic into production, it will stop functioning, unless you have a valid
+license for it.
+
+* [Get licensed](https://servergardens.com/buy/)
