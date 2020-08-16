@@ -97,7 +97,7 @@ namespace magic.lambda.validators.tests
         public void VerifyDate()
         {
             var signaler = Common.Initialize();
-            var args = new Node("", DateTime.Now, new Node[] { new Node("min", DateTime.Now.AddSeconds(-5)), new Node("max", DateTime.Now.AddSeconds(5)) });
+            var args = new Node("", DateTime.UtcNow, new Node[] { new Node("min", DateTime.UtcNow.AddSeconds(-5)), new Node("max", DateTime.UtcNow.AddSeconds(5)) });
             signaler.Signal("validators.date", args);
             Assert.Null(args.Value);
             Assert.Empty(args.Children);
@@ -107,7 +107,7 @@ namespace magic.lambda.validators.tests
         public void VerifyDate_FAILS()
         {
             var signaler = Common.Initialize();
-            var args = new Node("", DateTime.Now.AddSeconds(10), new Node[] { new Node("min", DateTime.Now.AddSeconds(-5)), new Node("max", DateTime.Now.AddSeconds(5)) });
+            var args = new Node("", DateTime.UtcNow.AddSeconds(10), new Node[] { new Node("min", DateTime.UtcNow.AddSeconds(-5)), new Node("max", DateTime.UtcNow.AddSeconds(5)) });
             Assert.Throws<ArgumentException>(() => signaler.Signal("validators.date", args));
         }
 
