@@ -37,12 +37,3 @@ Most validators requires some sort of argument(s), such as you can see above in 
 these validators are without arguments, such as the email validator, that simply verifies the input is a valid email address.
 To use the **[validators.regex]** validator, you should probably [learn regular expression](https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285).
 However, this is beyond the scope of this article.
-
-## License
-
-Although most of Magic's source code is Open Source, you will need a license key to use it.
-[You can obtain a license key here](https://servergardens.com/buy/).
-Notice, 7 days after you put Magic into production, it will stop working, unless you have a valid
-license for it.
-
-* [Get licensed](https://servergardens.com/buy/)

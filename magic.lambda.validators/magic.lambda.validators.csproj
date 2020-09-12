@@ -10,7 +10,7 @@
     <Description>Server side validator slots for your Magic endpoints, and/or other types of Hyperlambda functions requiring validation of input arguments.</Description>
     <PackageProjectUrl>https://github.com/polterguy/magic.lambda.validators</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>8.1.11</PackageVersion>
+    <PackageVersion>8.1.15</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/polterguy/magic.lambda.validators.git</RepositoryUrl>
