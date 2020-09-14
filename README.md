@@ -1,7 +1,7 @@
 
 # Magic Lambda Validators
 
-[![Build status](https://travis-ci.org/polterguy/magic.lambda.auth.svg?master)](https://travis-ci.org/polterguy/magic.lambda.auth)
+[![Build status](https://travis-ci.com/polterguy/magic.lambda.auth.svg?master)](https://travis-ci.com/polterguy/magic.lambda.auth)
 
 This project contains input validators for Magic. More specifically it contains the following slots.
 
