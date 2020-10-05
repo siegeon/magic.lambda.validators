@@ -7,10 +7,10 @@
     <Authors>Thomas Hansen</Authors>
     <Company>Thomas Hansen</Company>
     <Copyright>Thomas Hansen, thomas@gaiasoul.com</Copyright>
-    <Description>Server side validator slots for your Magic endpoints, and/or other types of Hyperlambda functions requiring validation of input arguments.</Description>
+    <Description>Server side validator slots for your Magic endpoints, and/or other types of Hyperlambda functions requiring validation of input arguments. To use package go to https://polterguy.github.io</Description>
     <PackageProjectUrl>https://github.com/polterguy/magic.lambda.validators</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>8.3.0</PackageVersion>
+    <PackageVersion>8.3.1</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/polterguy/magic.lambda.validators.git</RepositoryUrl>
