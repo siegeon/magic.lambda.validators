@@ -8,6 +8,7 @@ using System.Linq;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
+using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
 {
@@ -26,11 +27,11 @@ namespace magic.lambda.validators
         {
             var min = input.Children.FirstOrDefault(x => x.Name == "min")?.GetEx<DateTime>() ?? DateTime.MinValue;
             var max = input.Children.FirstOrDefault(x => x.Name == "max")?.GetEx<DateTime>() ?? DateTime.MaxValue;
-            var value = input.GetEx<DateTime>();
-            input.Value = null;
-            input.Clear();
-            if (value < min || value > max)
-                throw new ArgumentException($"The date time value of '{value}' is not between '{min}' and '{max}', which is a mandatory condition");
+            Enumerator.Enumerate<DateTime>(input, (value, name) =>
+            {
+                if (value < min || value > max)
+                    throw new ArgumentException($"The date time value of '{value}' in [{name}] is not between '{min}' and '{max}', which is a mandatory condition");
+            });
         }
     }
 }

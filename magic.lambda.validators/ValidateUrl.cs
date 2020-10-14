@@ -5,8 +5,8 @@
 
 using System;
 using magic.node;
-using magic.node.extensions;
 using magic.signals.contracts;
+using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
 {
@@ -23,12 +23,12 @@ namespace magic.lambda.validators
         /// <param name="input">Arguments to signal.</param>
         public void Signal(ISignaler signaler, Node input)
         {
-            var url = input.GetEx<string>();
-            bool result = Uri.TryCreate(url, UriKind.Absolute, out Uri res);
-            input.Value = null;
-            input.Clear();
-            if (!result || (res.Scheme != Uri.UriSchemeHttp && res.Scheme != Uri.UriSchemeHttps))
-                throw new ArgumentException($"'{url}' is not a valid URL, it needs to be prepended with http:// or https:// and also be a valid URL");
+            Enumerator.Enumerate<string>(input, (value, name) =>
+            {
+                bool result = Uri.TryCreate(value, UriKind.Absolute, out Uri res);
+                if (!result || (res.Scheme != Uri.UriSchemeHttp && res.Scheme != Uri.UriSchemeHttps))
+                    throw new ArgumentException($"'{value}' in [{name}] is not a valid URL, it needs to be prepended with http:// or https:// and also be a valid URL");
+            });
         }
     }
 }

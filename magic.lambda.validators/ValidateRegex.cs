@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
+using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
 {
@@ -25,14 +26,13 @@ namespace magic.lambda.validators
         /// <param name="input">Arguments to signal.</param>
         public void Signal(ISignaler signaler, Node input)
         {
-            var value = input.GetEx<string>();
             var pattern = input.Children.First(x => x.Name == "regex").GetEx<string>();
-            var isMatch = new Regex(pattern).IsMatch(value);
-            if (!isMatch)
-                throw new ArgumentException($"Value of '{value}' does not conform to regular expression of '{pattern}'");
-
-            input.Value = null;
-            input.Clear();
+            Enumerator.Enumerate<string>(input, (value, name) =>
+            {
+                var isMatch = new Regex(pattern).IsMatch(value);
+                if (!isMatch)
+                    throw new ArgumentException($"Value of '{value}' in [{name}] does not conform to regular expression of '{pattern}'");
+            });
         }
     }
 }

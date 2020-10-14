@@ -8,6 +8,7 @@ using System.Linq;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
+using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
 {
@@ -26,11 +27,11 @@ namespace magic.lambda.validators
         {
             var min = input.Children.FirstOrDefault(x => x.Name == "min")?.GetEx<int>() ?? 0;
             var max = input.Children.FirstOrDefault(x => x.Name == "max")?.GetEx<int>() ?? int.MaxValue;
-            var value = input.GetEx<string>();
-            input.Value = null;
-            input.Clear();
-            if (value.Length < min || value.Length > max)
-                throw new ArgumentException($"'{value}' for is not between {min} and {max} in length, which is a mandatory condition");
+            Enumerator.Enumerate<string>(input, (value, name) =>
+            {
+                if (value.Length < min || value.Length > max)
+                    throw new ArgumentException($"'{value}' in [{name}] is not between {min} and {max} in length, which is a mandatory condition");
+            });
         }
     }
 }

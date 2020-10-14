@@ -8,6 +8,7 @@ using System.Linq;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
+using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
 {
@@ -24,16 +25,16 @@ namespace magic.lambda.validators
         /// <param name="input">Arguments to signal.</param>
         public void Signal(ISignaler signaler, Node input)
         {
-            var value = input.GetEx<string>();
-            if (!input.Children.Any(x => x.Get<string>() == value))
+            Enumerator.Enumerate<string>(input, (value, name) =>
             {
-                var legalValues = input.Children.Select(x => "'" + x.Get<string>() + "'");
-                var legalValueString = string.Join(", ", legalValues.ToArray());
-                input.Clear();
-                throw new ArgumentException($"'{value}' is not a legal value for field, [{legalValueString}] is a legal value for input.");
-            }
-            input.Value = null;
-            input.Clear();
+                if (!input.Children.Any(x2 => x2.Get<string>() == value))
+                {
+                    var legalValues = input.Children.Select(x2 => "'" + x2.Get<string>() + "'");
+                    var legalValueString = string.Join(", ", legalValues.ToArray());
+                    input.Clear();
+                    throw new ArgumentException($"'{value}' in [{name}] is not a legal value for field, [{legalValueString}] is a legal value for input.");
+                }
+            });
         }
     }
 }
