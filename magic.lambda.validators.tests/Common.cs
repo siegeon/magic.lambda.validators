@@ -7,13 +7,23 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using magic.node;
 using magic.signals.services;
 using magic.signals.contracts;
+using magic.node.extensions.hyperlambda;
 
 namespace magic.lambda.validators.tests
 {
     public static class Common
     {
+        static public Node Evaluate(string hl)
+        {
+            var signaler = Initialize();
+            var lambda = new Parser(hl).Lambda();
+            signaler.Signal("eval", lambda);
+            return lambda;
+        }
+
         public static ISignaler Initialize()
         {
             var services = new ServiceCollection();

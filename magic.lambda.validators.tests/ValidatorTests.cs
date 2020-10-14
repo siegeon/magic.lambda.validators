@@ -164,5 +164,35 @@ namespace magic.lambda.validators.tests
             var args = new Node("", "foo_XXX", new Node[] { new Node("regex", "^foo$") });
             Assert.Throws<ArgumentException>(() => signaler.Signal("validators.regex", args));
         }
+
+        [Fact]
+        public void ValidateMultipleNodes()
+        {
+            Common.Evaluate(@".arguments
+   foo
+      objects
+         .
+            no:5
+         .
+            no:10
+validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
+   min:5
+   max:10");
+        }
+
+        [Fact]
+        public void ValidateMultipleNodes_FAILS()
+        {
+            Assert.Throws<ArgumentException>(() => Common.Evaluate(@".arguments
+   foo
+      objects
+         .
+            no:5
+         .
+            no:11
+validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
+   min:5
+   max:10"));
+        }
     }
 }
