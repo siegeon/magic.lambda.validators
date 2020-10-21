@@ -26,9 +26,16 @@ namespace magic.lambda.validators
         {
             Enumerator.Enumerate<string>(input, (value, name) =>
             {
-                var addr = new MailAddress(value);
-                if (addr.Address != value)
+                try
+                {
+                    var addr = new MailAddress(value);
+                    if (addr.Address != value)
+                        throw new ArgumentException($"'{value}' in [{name}] is not a valid email address"); // Verifying there are not funny configurations, creating name as first part
+                }
+                catch
+                {
                     throw new ArgumentException($"'{value}' in [{name}] is not a valid email address"); // Verifying there are not funny configurations, creating name as first part
+                }
             });
         }
     }
