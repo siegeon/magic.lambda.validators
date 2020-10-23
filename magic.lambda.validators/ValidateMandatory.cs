@@ -27,7 +27,15 @@ namespace magic.lambda.validators
             var value = input.GetEx<object>();
             var name = input.Value is Expression exp ? exp.Iterators.Last().Value : "";
             if (value == null)
+            {
+                var ex = input.Value as Expression;
+                if (ex != null)
+                {
+                    if (ex.Evaluate(input)?.FirstOrDefault()?.Children.Any() ?? false)
+                        return;
+                }
                 throw new ArgumentException($"Mandatory [{name}] argument was not given");
+            }
         }
     }
 }
