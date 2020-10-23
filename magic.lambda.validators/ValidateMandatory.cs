@@ -4,9 +4,10 @@
  */
 
 using System;
+using System.Linq;
 using magic.node;
+using magic.node.extensions;
 using magic.signals.contracts;
-using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
 {
@@ -23,11 +24,10 @@ namespace magic.lambda.validators
         /// <param name="input">Arguments to signal.</param>
         public void Signal(ISignaler signaler, Node input)
         {
-            Enumerator.Enumerate<object>(input, (value, name) =>
-            {
-                if (value == null)
-                    throw new ArgumentException($"Mandatory value in [{name}] was not given");
-            });
+            var value = input.GetEx<object>();
+            var name = input.Value is Expression exp ? exp.Iterators.Last().Value : "";
+            if (value == null)
+                throw new ArgumentException($"Mandatory [{name}] argument was not given");
         }
     }
 }
