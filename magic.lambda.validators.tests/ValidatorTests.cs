@@ -26,7 +26,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo@@bar.com");
-            Assert.Throws<FormatException>(() => signaler.Signal("validators.email", args));
+            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.email", args));
         }
 
         [Fact]
@@ -135,8 +135,6 @@ namespace magic.lambda.validators.tests
             var signaler = Common.Initialize();
             var args = new Node("", "foo");
             signaler.Signal("validators.mandatory", args);
-            Assert.Null(args.Value);
-            Assert.Empty(args.Children);
         }
 
         [Fact]
