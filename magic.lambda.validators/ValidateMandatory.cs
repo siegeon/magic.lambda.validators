@@ -29,11 +29,8 @@ namespace magic.lambda.validators
             if (value == null)
             {
                 var ex = input.Value as Expression;
-                if (ex != null)
-                {
-                    if (ex.Evaluate(input)?.FirstOrDefault()?.Children.Any() ?? false)
-                        return;
-                }
+                if (ex != null && (ex.Evaluate(input)?.FirstOrDefault()?.Children.Any() ?? false))
+                    return;
                 throw new ArgumentException($"Mandatory [{name}] argument was not given");
             }
         }
