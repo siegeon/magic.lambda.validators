@@ -8,6 +8,7 @@ using System.Linq;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
+using magic.lambda.exceptions;
 using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
@@ -30,7 +31,10 @@ namespace magic.lambda.validators
             Enumerator.Enumerate<DateTime>(input, (value, name) =>
             {
                 if (value < min || value > max)
-                    throw new ArgumentException($"The date time value of '{value}' in [{name}] is not between '{min}' and '{max}', which is a mandatory condition");
+                    throw new HyperlambdaException(
+                        $"The date time value of '{value}' in [{name}] is not between '{min}' and '{max}', which is a mandatory condition", 
+                        true, 
+                        400);
             });
         }
     }
