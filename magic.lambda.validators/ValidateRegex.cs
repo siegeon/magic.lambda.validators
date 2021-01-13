@@ -32,9 +32,10 @@ namespace magic.lambda.validators
                 var isMatch = new Regex(pattern).IsMatch(value);
                 if (!isMatch)
                     throw new HyperlambdaException(
-                        $"Value of '{value}' in [{name}] does not conform to regular expression of '{pattern}'",
+                        $"'{value}' does not conform to regular expression of '{pattern}'",
                         true,
-                        400);
+                        400,
+                        name);
             });
         }
     }

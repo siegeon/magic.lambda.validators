@@ -31,9 +31,10 @@ namespace magic.lambda.validators
                 if (ex != null && (ex.Evaluate(input)?.FirstOrDefault()?.Children.Any() ?? false))
                     return;
                 throw new HyperlambdaException(
-                    $"Mandatory [{name}] argument was not given",
+                    "Mandatory argument not given",
                     true,
-                    400);
+                    400,
+                    name);
             }
         }
     }

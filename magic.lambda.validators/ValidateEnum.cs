@@ -33,9 +33,10 @@ namespace magic.lambda.validators
                     var legalValueString = string.Join(", ", legalValues.ToArray());
                     input.Clear();
                     throw new HyperlambdaException(
-                        $"'{value}' in [{name}] is not a legal value for field, [{legalValueString}] is a legal value for input.",
+                        $"'{value}' is not a valid enum of [{legalValueString}]",
                         true,
-                        400);
+                        400,
+                        name);
                 }
             });
         }

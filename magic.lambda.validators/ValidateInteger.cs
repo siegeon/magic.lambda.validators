@@ -31,9 +31,10 @@ namespace magic.lambda.validators
             {
                 if (value < min || value > max)
                     throw new HyperlambdaException(
-                        $"'{value}' in [{name}] is not between {min} and {max}, which is a mandatory condition",
+                        $"'{value}' is not a valid number between {min} and {max}",
                         true,
-                        400);
+                        400,
+                        name);
             });
         }
     }
