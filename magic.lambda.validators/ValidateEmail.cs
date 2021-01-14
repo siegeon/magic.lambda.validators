@@ -43,9 +43,10 @@ namespace magic.lambda.validators
                 {
                     // Verifying there are not funny configurations, creating name as first part
                     throw new HyperlambdaException(
-                        $"'{value}' in [{name}] is not a valid email address",
+                        $"'{value}' is not a valid email address",
                         true,
-                        400);
+                        400,
+                        name);
                 }
             });
         }
