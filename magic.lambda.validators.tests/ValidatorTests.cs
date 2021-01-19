@@ -6,6 +6,7 @@
 using System;
 using Xunit;
 using magic.node;
+using magic.lambda.exceptions;
 
 namespace magic.lambda.validators.tests
 {
@@ -26,7 +27,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo@@bar.com");
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.email", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.email", args));
         }
 
         [Fact]
@@ -44,7 +45,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", 8, new Node[] { new Node("min", 4), new Node("max", 7) });
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.integer", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.integer", args));
         }
 
         [Fact]
@@ -62,7 +63,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "how", new Node[] { new Node("min", 4), new Node("max", 7) });
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.string", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.string", args));
         }
 
         [Fact]
@@ -90,7 +91,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo.com");
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.url", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.url", args));
         }
 
         [Fact]
@@ -108,7 +109,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", DateTime.UtcNow.AddSeconds(10), new Node[] { new Node("min", DateTime.UtcNow.AddSeconds(-5)), new Node("max", DateTime.UtcNow.AddSeconds(5)) });
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.date", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.date", args));
         }
 
         [Fact]
@@ -126,7 +127,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo1", new Node[] { new Node("", "foo"), new Node("", "bar") });
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.enum", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.enum", args));
         }
 
         [Fact]
@@ -142,7 +143,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("");
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.mandatory", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.mandatory", args));
         }
 
         [Fact]
@@ -160,7 +161,7 @@ namespace magic.lambda.validators.tests
         {
             var signaler = Common.Initialize();
             var args = new Node("", "foo_XXX", new Node[] { new Node("regex", "^foo$") });
-            Assert.Throws<ArgumentException>(() => signaler.Signal("validators.regex", args));
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.regex", args));
         }
 
         [Fact]
@@ -181,7 +182,7 @@ validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
         [Fact]
         public void ValidateMultipleNodes_FAILS()
         {
-            Assert.Throws<ArgumentException>(() => Common.Evaluate(@".arguments
+            Assert.Throws<HyperlambdaException>(() => Common.Evaluate(@".arguments
    foo
       objects
          .
