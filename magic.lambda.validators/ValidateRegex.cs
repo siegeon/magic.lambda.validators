@@ -3,11 +3,11 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using magic.node;
 using magic.node.extensions;
+using magic.lambda.exceptions;
 using magic.signals.contracts;
 using magic.lambda.validators.helpers;
 
@@ -31,7 +31,11 @@ namespace magic.lambda.validators
             {
                 var isMatch = new Regex(pattern).IsMatch(value);
                 if (!isMatch)
-                    throw new ArgumentException($"Value of '{value}' in [{name}] does not conform to regular expression of '{pattern}'");
+                    throw new HyperlambdaException(
+                        $"'{value}' does not conform to regular expression of '{pattern}'",
+                        true,
+                        400,
+                        name);
             });
         }
     }

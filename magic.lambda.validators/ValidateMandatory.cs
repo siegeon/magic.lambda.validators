@@ -2,11 +2,10 @@
  * Magic, Copyright(c) Thomas Hansen 2019 - 2020, thomas@servergardens.com, all rights reserved.
  * See the enclosed LICENSE file for details.
  */
-
-using System;
 using System.Linq;
 using magic.node;
 using magic.node.extensions;
+using magic.lambda.exceptions;
 using magic.signals.contracts;
 
 namespace magic.lambda.validators
@@ -31,7 +30,11 @@ namespace magic.lambda.validators
                 var ex = input.Value as Expression;
                 if (ex != null && (ex.Evaluate(input)?.FirstOrDefault()?.Children.Any() ?? false))
                     return;
-                throw new ArgumentException($"Mandatory [{name}] argument was not given");
+                throw new HyperlambdaException(
+                    "Mandatory argument not given",
+                    true,
+                    400,
+                    name);
             }
         }
     }

@@ -3,10 +3,10 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
 using System.Net.Mail;
 using magic.node;
 using magic.signals.contracts;
+using magic.lambda.exceptions;
 using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators
@@ -30,11 +30,23 @@ namespace magic.lambda.validators
                 {
                     var addr = new MailAddress(value);
                     if (addr.Address != value)
-                        throw new ArgumentException($"'{value}' in [{name}] is not a valid email address"); // Verifying there are not funny configurations, creating name as first part
+                    {
+                        // Verifying there are not funny configurations, creating name as first part
+                        throw new HyperlambdaException(
+                            $"'{value}' is not a valid email address",
+                            true,
+                            400,
+                            name);
+                    }
                 }
                 catch
                 {
-                    throw new ArgumentException($"'{value}' in [{name}] is not a valid email address"); // Verifying there are not funny configurations, creating name as first part
+                    // Verifying there are not funny configurations, creating name as first part
+                    throw new HyperlambdaException(
+                        $"'{value}' is not a valid email address",
+                        true,
+                        400,
+                        name);
                 }
             });
         }

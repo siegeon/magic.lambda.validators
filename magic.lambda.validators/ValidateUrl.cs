@@ -5,6 +5,7 @@
 
 using System;
 using magic.node;
+using magic.lambda.exceptions;
 using magic.signals.contracts;
 using magic.lambda.validators.helpers;
 
@@ -27,7 +28,11 @@ namespace magic.lambda.validators
             {
                 bool result = Uri.TryCreate(value, UriKind.Absolute, out Uri res);
                 if (!result || (res.Scheme != Uri.UriSchemeHttp && res.Scheme != Uri.UriSchemeHttps))
-                    throw new ArgumentException($"'{value}' in [{name}] is not a valid URL, it needs to be prepended with http:// or https:// and also be a valid URL");
+                    throw new HyperlambdaException(
+                        $"'{value}' is not a valid URL",
+                        true,
+                        400,
+                        name);
             });
         }
     }

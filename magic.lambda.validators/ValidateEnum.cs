@@ -3,10 +3,10 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
 using System.Linq;
 using magic.node;
 using magic.node.extensions;
+using magic.lambda.exceptions;
 using magic.signals.contracts;
 using magic.lambda.validators.helpers;
 
@@ -32,7 +32,11 @@ namespace magic.lambda.validators
                     var legalValues = input.Children.Select(x2 => "'" + x2.Get<string>() + "'");
                     var legalValueString = string.Join(", ", legalValues.ToArray());
                     input.Clear();
-                    throw new ArgumentException($"'{value}' in [{name}] is not a legal value for field, [{legalValueString}] is a legal value for input.");
+                    throw new HyperlambdaException(
+                        $"'{value}' is not a valid enum of [{legalValueString}]",
+                        true,
+                        400,
+                        name);
                 }
             });
         }

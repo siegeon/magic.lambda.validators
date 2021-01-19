@@ -3,10 +3,10 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
 using System.Linq;
 using magic.node;
 using magic.node.extensions;
+using magic.lambda.exceptions;
 using magic.signals.contracts;
 using magic.lambda.validators.helpers;
 
@@ -30,7 +30,11 @@ namespace magic.lambda.validators
             Enumerator.Enumerate<long>(input, (value, name) =>
             {
                 if (value < min || value > max)
-                    throw new ArgumentException($"'{value}' in [{name}] is not between {min} and {max}, which is a mandatory condition");
+                    throw new HyperlambdaException(
+                        $"'{value}' is not a valid number between {min} and {max}",
+                        true,
+                        400,
+                        name);
             });
         }
     }
