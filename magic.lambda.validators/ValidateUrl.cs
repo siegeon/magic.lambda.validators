@@ -29,7 +29,7 @@ namespace magic.lambda.validators
                 bool result = Uri.TryCreate(value, UriKind.Absolute, out Uri res);
                 if (!result || (res.Scheme != Uri.UriSchemeHttp && res.Scheme != Uri.UriSchemeHttps))
                     throw new HyperlambdaException(
-                        $"'{value}' is not a valid URL",
+                        $"'{value}' is not a valid URL for [{name}]",
                         true,
                         400,
                         name);

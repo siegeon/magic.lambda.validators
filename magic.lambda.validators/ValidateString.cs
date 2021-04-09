@@ -31,7 +31,7 @@ namespace magic.lambda.validators
             {
                 if (value.Length < min || value.Length > max)
                     throw new HyperlambdaException(
-                        $"'{value}' is not a valid string between {min} and {max} in length",
+                        $"'{value}' is not a valid string between {min} and {max} in length for [{name}]",
                         true,
                         400,
                         name);

@@ -32,7 +32,7 @@ namespace magic.lambda.validators
             {
                 if (value < min || value > max)
                     throw new HyperlambdaException(
-                        $"'{value}' is not a valid date between '{min}' and '{max}'", 
+                        $"'{value}' is not a valid date between '{min}' and '{max}' for [{name}]", 
                         true, 
                         400,
                         name);
