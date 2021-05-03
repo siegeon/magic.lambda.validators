@@ -28,12 +28,16 @@ namespace magic.lambda.validators.helpers
                     var value = x.Iterators.LastOrDefault()?.Value;
                     foreach (var idx in node.Evaluate())
                     {
-                        functor(idx.GetEx<T>(), value);
+                        var obj = idx.GetEx<T>();
+                        if (obj != null)
+                            functor(obj, value);
                     }
                 }
                 else
                 {
-                    functor(node.GetEx<T>(), "value of node");
+                    var obj = node.GetEx<T>();
+                    if (obj != null)
+                        functor(obj, "value of node");
                 }
             }
             finally
