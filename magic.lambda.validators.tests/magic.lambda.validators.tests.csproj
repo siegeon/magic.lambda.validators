@@ -18,12 +18,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="magic.lambda" Version="9.2.0" />
-    <PackageReference Include="magic.signals" Version="9.2.0" />
+    <PackageReference Include="magic.lambda" Version="9.7.0" />
+    <PackageReference Include="magic.signals" Version="9.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="magic.lambda" Version="9.2.0" />
+    <PackageReference Include="magic.lambda" Version="9.7.0" />
     <ProjectReference Include="..\magic.lambda.validators\magic.lambda.validators.csproj" />
   </ItemGroup>
 
