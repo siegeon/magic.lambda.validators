@@ -7,7 +7,6 @@ using System.Linq;
 using magic.node;
 using magic.node.extensions;
 using magic.signals.contracts;
-using magic.lambda.exceptions;
 using magic.lambda.validators.helpers;
 
 namespace magic.lambda.validators

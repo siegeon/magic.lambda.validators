@@ -10,7 +10,7 @@
     <Description>Server side validator slots for your Magic endpoints, and/or other types of Hyperlambda functions requiring validation of input arguments. To use package go to https://polterguy.github.io</Description>
     <PackageProjectUrl>https://github.com/polterguy/magic.lambda.validators</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>9.9.3</PackageVersion>
+    <PackageVersion>9.9.9</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/polterguy/magic.lambda.validators.git</RepositoryUrl>
@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -46,8 +46,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="magic.lambda" Version="9.9.3" />
-    <PackageReference Include="magic.node.extensions" Version="9.9.3" />
-    <PackageReference Include="magic.signals.contracts" Version="9.9.3" />
+    <PackageReference Include="magic.node.extensions" Version="9.9.9" />
+    <PackageReference Include="magic.signals.contracts" Version="9.9.9" />
   </ItemGroup>
 </Project>

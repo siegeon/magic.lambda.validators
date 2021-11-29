@@ -4,7 +4,7 @@
 
 using System;
 using magic.node;
-using magic.lambda.exceptions;
+using magic.node.extensions;
 using magic.signals.contracts;
 using magic.lambda.validators.helpers;
 

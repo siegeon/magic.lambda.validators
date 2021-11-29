@@ -5,7 +5,7 @@
 using System;
 using Xunit;
 using magic.node;
-using magic.lambda.exceptions;
+using magic.node.extensions;
 
 namespace magic.lambda.validators.tests
 {

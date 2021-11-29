@@ -5,7 +5,6 @@
 using System.Linq;
 using magic.node;
 using magic.node.extensions;
-using magic.lambda.exceptions;
 using magic.signals.contracts;
 using magic.lambda.validators.helpers;
 
