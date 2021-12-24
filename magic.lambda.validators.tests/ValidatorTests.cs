@@ -129,7 +129,7 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.enum", args));
         }
 
-        #pragma warning disable IDEL134
+        #pragma warning disable S2699
         [Fact]
         public void VerifyMandatory()
         {
@@ -137,7 +137,7 @@ namespace magic.lambda.validators.tests
             var args = new Node("", "foo");
             signaler.Signal("validators.mandatory", args);
         }
-        #pragma warning restore IDEL134
+        #pragma warning restore S2699
 
         [Fact]
         public void VerifyMandator_FAILS()
@@ -165,7 +165,7 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.regex", args));
         }
 
-        #pragma warning disable L134
+        #pragma warning disable S2699
         [Fact]
         public void ValidateMultipleNodes()
         {
@@ -180,7 +180,7 @@ validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
    min:5
    max:10");
         }
-        #pragma warning restore L134
+        #pragma warning restore S2699
 
         [Fact]
         public void ValidateMultipleNodes_FAILS()
