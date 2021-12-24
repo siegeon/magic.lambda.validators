@@ -129,7 +129,7 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.enum", args));
         }
 
-        // @SONAR_STOP@
+        #pragma warning disable L134
         [Fact]
         public void VerifyMandatory()
         {
@@ -137,7 +137,7 @@ namespace magic.lambda.validators.tests
             var args = new Node("", "foo");
             signaler.Signal("validators.mandatory", args);
         }
-        // @SONAR_START@
+        #pragma warning restore L134
 
         [Fact]
         public void VerifyMandator_FAILS()
@@ -165,7 +165,7 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.regex", args));
         }
 
-        // @SONAR_STOP@
+        #pragma warning disable L134
         [Fact]
         public void ValidateMultipleNodes()
         {
@@ -180,7 +180,7 @@ validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
    min:5
    max:10");
         }
-        // @SONAR_START@
+        #pragma warning restore L134
 
         [Fact]
         public void ValidateMultipleNodes_FAILS()
