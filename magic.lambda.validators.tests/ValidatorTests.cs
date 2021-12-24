@@ -132,9 +132,11 @@ namespace magic.lambda.validators.tests
         [Fact]
         public void VerifyMandatory()
         {
+            // @SONAR_STOP@
             var signaler = Common.Initialize();
             var args = new Node("", "foo");
             signaler.Signal("validators.mandatory", args);
+            // @SONAR_START@
         }
 
         [Fact]
@@ -166,6 +168,7 @@ namespace magic.lambda.validators.tests
         [Fact]
         public void ValidateMultipleNodes()
         {
+            // @SONAR_STOP@
             Common.Evaluate(@".arguments
    foo
       objects
@@ -176,6 +179,7 @@ namespace magic.lambda.validators.tests
 validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
    min:5
    max:10");
+            // @SONAR_START@
         }
 
         [Fact]
