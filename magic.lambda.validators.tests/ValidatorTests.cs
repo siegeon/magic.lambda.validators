@@ -129,7 +129,7 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.enum", args));
         }
 
-        #pragma warning disable L134
+        #pragma warning disable IDEL134
         [Fact]
         public void VerifyMandatory()
         {
@@ -137,7 +137,7 @@ namespace magic.lambda.validators.tests
             var args = new Node("", "foo");
             signaler.Signal("validators.mandatory", args);
         }
-        #pragma warning restore L134
+        #pragma warning restore IDEL134
 
         [Fact]
         public void VerifyMandator_FAILS()
