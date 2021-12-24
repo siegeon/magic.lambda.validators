@@ -129,15 +129,15 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.enum", args));
         }
 
+        // @SONAR_STOP@
         [Fact]
         public void VerifyMandatory()
         {
-            // @SONAR_STOP@
             var signaler = Common.Initialize();
             var args = new Node("", "foo");
             signaler.Signal("validators.mandatory", args);
-            // @SONAR_START@
         }
+        // @SONAR_START@
 
         [Fact]
         public void VerifyMandator_FAILS()
@@ -165,10 +165,10 @@ namespace magic.lambda.validators.tests
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.regex", args));
         }
 
+        // @SONAR_STOP@
         [Fact]
         public void ValidateMultipleNodes()
         {
-            // @SONAR_STOP@
             Common.Evaluate(@".arguments
    foo
       objects
@@ -179,8 +179,8 @@ namespace magic.lambda.validators.tests
 validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
    min:5
    max:10");
-            // @SONAR_START@
         }
+        // @SONAR_START@
 
         [Fact]
         public void ValidateMultipleNodes_FAILS()
