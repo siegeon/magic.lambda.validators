@@ -182,6 +182,16 @@ validators.integer:x:@.arguments/*/foo/*/objects/*/*/no
         }
         #pragma warning restore S2699
 
+        #pragma warning disable S2699
+        [Fact]
+        public void ValidateMandatoryExpression()
+        {
+            Common.Evaluate(@".arguments
+   foo:bar
+validators.mandatory:x:@.arguments/*/foo");
+        }
+        #pragma warning restore S2699
+
         [Fact]
         public void ValidateMultipleNodes_FAILS()
         {
