@@ -192,6 +192,25 @@ validators.mandatory:x:@.arguments/*/foo");
         }
         #pragma warning restore S2699
 
+        #pragma warning disable S2699
+        [Fact]
+        public void ValidateMandatoryExpressionWithChildren()
+        {
+            Common.Evaluate(@".arguments
+   foo
+      actual:value
+validators.mandatory:x:@.arguments/*/foo");
+        }
+        #pragma warning restore S2699
+
+        [Fact]
+        public void ValidateEmailExpression_Throws()
+        {
+            Assert.Throws<HyperlambdaException>(() => Common.Evaluate(@".arguments
+   foo:""Thomas Hansen <foo@bar.com>""
+validators.email:x:@.arguments/*/foo"));
+        }
+
         [Fact]
         public void ValidateMultipleNodes_FAILS()
         {
