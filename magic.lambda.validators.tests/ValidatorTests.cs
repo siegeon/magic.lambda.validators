@@ -40,7 +40,7 @@ namespace magic.lambda.validators.tests
         }
 
         [Fact]
-        public void VerifyInteger_FAILS()
+        public void VerifyInteger_FAILS_01()
         {
             var signaler = Common.Initialize();
             var args = new Node("", 8, new Node[] { new Node("min", 4), new Node("max", 7) });
@@ -48,7 +48,15 @@ namespace magic.lambda.validators.tests
         }
 
         [Fact]
-        public void VerifyString()
+        public void VerifyInteger_FAILS_02()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", 3, new Node[] { new Node("min", 4), new Node("max", 7) });
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.integer", args));
+        }
+
+        [Fact]
+        public void VerifyString_01()
         {
             var signaler = Common.Initialize();
             var args = new Node("", "howdy", new Node[] { new Node("min", 4), new Node("max", 7) });
@@ -58,10 +66,28 @@ namespace magic.lambda.validators.tests
         }
 
         [Fact]
-        public void VerifyString_FAILS()
+        public void VerifyString_02()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "howdy");
+            signaler.Signal("validators.string", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyString_FAILS_01()
         {
             var signaler = Common.Initialize();
             var args = new Node("", "how", new Node[] { new Node("min", 4), new Node("max", 7) });
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.string", args));
+        }
+
+        [Fact]
+        public void VerifyString_FAILS_02()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "howdy world", new Node[] { new Node("min", 4), new Node("max", 7) });
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.string", args));
         }
 
@@ -94,7 +120,7 @@ namespace magic.lambda.validators.tests
         }
 
         [Fact]
-        public void VerifyDate()
+        public void VerifyDate_01()
         {
             var signaler = Common.Initialize();
             var args = new Node("", DateTime.UtcNow, new Node[] { new Node("min", DateTime.UtcNow.AddSeconds(-5)), new Node("max", DateTime.UtcNow.AddSeconds(5)) });
@@ -104,10 +130,36 @@ namespace magic.lambda.validators.tests
         }
 
         [Fact]
-        public void VerifyDate_FAILS()
+        public void VerifyDate_02()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", DateTime.UtcNow);
+            signaler.Signal("validators.date", args);
+            Assert.Null(args.Value);
+            Assert.Empty(args.Children);
+        }
+
+        [Fact]
+        public void VerifyDate_FAILS_01()
         {
             var signaler = Common.Initialize();
             var args = new Node("", DateTime.UtcNow.AddSeconds(10), new Node[] { new Node("min", DateTime.UtcNow.AddSeconds(-5)), new Node("max", DateTime.UtcNow.AddSeconds(5)) });
+            Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.date", args));
+        }
+
+        [Fact]
+        public void VerifyDate_FAILS_02()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", "not a date!");
+            Assert.Throws<FormatException>(() => signaler.Signal("validators.date", args));
+        }
+
+        [Fact]
+        public void VerifyDate_FAILS_03()
+        {
+            var signaler = Common.Initialize();
+            var args = new Node("", DateTime.UtcNow.AddSeconds(-10), new Node[] { new Node("min", DateTime.UtcNow.AddSeconds(-5)), new Node("max", DateTime.UtcNow.AddSeconds(5)) });
             Assert.Throws<HyperlambdaException>(() => signaler.Signal("validators.date", args));
         }
 
@@ -210,6 +262,16 @@ validators.mandatory:x:@.arguments/*/foo");
    foo:""Thomas Hansen <foo@bar.com>""
 validators.email:x:@.arguments/*/foo"));
         }
+
+        #pragma warning disable S2699
+        [Fact]
+        public void ValidateInteger()
+        {
+            Common.Evaluate(@".arguments
+   foo:int:5
+validators.integer:x:@.arguments/*/foo");
+        }
+        #pragma warning restore S2699
 
         [Fact]
         public void ValidateMultipleNodes_FAILS()
